@@ -1,0 +1,41 @@
+.imageBox, .box-container
+{
+    position: relative;
+    width: 500px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+}
+.imageBox{
+    height: 500px;
+    background: rgba(255,255,255,0.25);
+    border:1px solid #aaa;
+    cursor:move;
+
+}
+.imageBox .thumbBox
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 302px;
+    height: 302px;
+    margin-top: -151px;
+    margin-left: -151px;
+    box-sizing: border-box;
+    border: 1px solid rgb(102, 102, 102);
+    box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+    background: none repeat scroll 0% 0% transparent;
+}
+
+.imageBox .spinner
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    line-height: 600px;
+    background: rgba(0,0,0,0.7);
+}
