@@ -53,7 +53,7 @@ Schemas.Profile = new SimpleSchema({
 	},
 	phoneNumber:{
 		type:Number,
-		optional: true
+		optional:true
 	},
 	discountRate:{
 		type:Number,
@@ -66,7 +66,7 @@ Schemas.Profile = new SimpleSchema({
 });
 
 Schemas.Schedule = new SimpleSchema({
-	starttime:{
+	start:{
 		type:Date,
 		autoform:{
 			afFieldInput:{
@@ -74,13 +74,21 @@ Schemas.Schedule = new SimpleSchema({
 			}
 		}
 	},
-	endtime:{
+	end:{
 		type:Date,
 		autoform:{
 			afFieldInput:{
 				type:'bootstrap-datetimepicker'
 			}
 		}
+	},
+	title:{
+		type:String,
+		autoValue:function() {
+			if (this.isInsert) {
+				return 'Available';
+			}
+		},
 	},
 	user:{
 		type:String,

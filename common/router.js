@@ -3,6 +3,9 @@ Router.configure({
 });
 
 Router.route('/', {
+	waitOn:function(){
+		Meteor.subscribe('schedule');
+	},
 	action:function(){
 		this.render('main');
 	}
@@ -24,7 +27,7 @@ Router.route('/profile', {
 Router.route('/schedule', {
 
 });
-
+/*
 Router.route('/admin', {
 	layoutTemplate:'admin_layout',
 	action:function(){
@@ -67,4 +70,4 @@ Router.route('/admin/user/:userId', {
 			this.render('admin_user_profile');
 		}
 	}
-});
+});*/

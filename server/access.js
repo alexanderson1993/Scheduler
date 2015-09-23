@@ -29,21 +29,19 @@ Users.allow({
 // Only Flight Directors (and admins) can change schedules.
 Schedule.allow({
 	insert:function(userId){
-		if (!Roles.userIsInRole(userId, ['admin', 'flight-director'])){
-			return false;
+		if (Roles.userIsInRole(userId, ['admin', 'flight-director'])){
+			return true;
 		}
 	},
 	update:function(userId, doc){
-		if (!Roles.userIsInRole(userId, ['admin'])){
-			if (userId !== doc.user){
-				return false;
-			}
+		if (userId == doc.user || (Roles.userIsInRole(userId, ['admin']))){
+			return true;
 		}
 	},
 	remove:function(userId, doc){
-		if (!Roles.userIsInRole(userId, ['admin'])){
+		if (Roles.userIsInRole(userId, ['admin'])){
 			if (userId !== doc.user){
-				return false;
+				return true;
 			}
 		}
 	},

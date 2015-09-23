@@ -1,5 +1,5 @@
 Meteor.publish('users', function(userId){
-	if (Roles.userIsInRole(userId, ['admin', 'manage-users'])){
+	if (Roles.userIsInRole(userId, ['admin', 'manage-users','flight-director'])){
 		return Meteor.users.find();
 	} else {
 		return Meteor.users.find({_id:userId});
