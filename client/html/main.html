@@ -1,6 +1,21 @@
+<head>
+<title>Space Center</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="apple-mobile-web-app-title" content="Recipes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+
 <template name="main">
-	<span class="pull-right">
-		{{> atNavButton}}
-	</span>
-	{{> fullcalendar options}}
+	 <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1>{{{ dicto 'frontHeader'}}}</h1>
+                <hr>
+                <p>{{{ dicto 'frontBody'}}}</p>
+                {{{ dicto 'frontButtons'}}}
+            </div>
+        </div>
+    </header>
 </template>

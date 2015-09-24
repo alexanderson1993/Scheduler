@@ -4,7 +4,6 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
 http
 less
 fortawesome:fontawesome
@@ -14,7 +13,6 @@ aldeed:autoform-bs-datepicker
 momentjs:moment
 aldeed:autoform
 aldeed:collection2
-alanning:roles
 cfs:standard-packages
 cfs:s3
 cfs:gridfs
@@ -30,5 +28,20 @@ service-configuration
 upload-avatar
 cfs:filesystem
 rzymek:fullcalendar
-yogiben:admin
+orionjs:core
+orionjs:bootstrap
 alexanderson1993:please.js
+standard-minifiers
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+jquery
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check

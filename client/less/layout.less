@@ -1,9 +1,29 @@
-@import "admin/variables.import.less";
+@import "theme.variables.less";
 
 #iron-router-progress {
-    background-color : @brand-primary;
-    box-shadow       : 0 0 5px @brand-primary;
+	background-color : @brand-primary;
+	box-shadow       : 0 0 5px @brand-primary;
 }
 #iron-router-progress.spinner:before {
-    border-color : @brand-primary;
+	border-color : @brand-primary;
+}
+.background:after{
+	width: 1440px;
+	height: 600px;
+	content: '';
+	opacity:0.3;
+	background-image: url(/bottom.jpg);
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+}
+.background:before{
+	width: 800px;
+	height: 400px;
+	opacity:0.3;
+	content: '';
+	background-image: url(/top.jpg);
+	position: fixed;
+	top: 0px;
+	left: 0px;
 }

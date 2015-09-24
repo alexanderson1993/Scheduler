@@ -3,8 +3,13 @@
 <body>
 </body>
 
+<template name="front_layout">
+	{{> nav}}
+	{{> yield}}
+</template>
+
 <template name="main_layout">
-	<div class="container">
-		{{> yield}}
-	</div>
+	<div class="background"></div>
+	{{>nav}}
+	{{>yield}}
 </template>

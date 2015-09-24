@@ -7,8 +7,12 @@ function events(start, end, timezone, callback){
 		e.end = moment(e.end);
 		user = Meteor.users.findOne({_id:e.user});
 		if (user){
-			e.title = e.title + " - " + user.profile.firstname + " " +
-			user.profile.lastname.substr(0, 1);
+			if (user.profile){
+				if (user.profile.firstname){
+					e.title = e.title + " - " + user.profile.firstname + " " +
+					user.profile.lastname.substr(0, 1);
+				}
+			}
 		}
 		if (!userColors[e.user]){
 			userColors[e.user] = Please.make_color();
@@ -18,7 +22,7 @@ function events(start, end, timezone, callback){
 	});
 	callback(output);
 }
-Template.main.helpers({
+Template.schedule.helpers({
 	options:function() {
 		return {
 			defaultView:'agendaWeek',
@@ -29,12 +33,14 @@ Template.main.helpers({
 			selectable:true,
 			selectHelper:true,
 			select:function(start, end){
-				var obj = {
-					start:start.toISOString(),
-					end:end.toISOString(),
-					user:Meteor.userId(),
-				};
-				Schedule.insert(obj);
+				if (Meteor.userId()){
+					var obj = {
+						start:start.toISOString(),
+						end:end.toISOString(),
+						user:Meteor.userId(),
+					};
+					Schedule.insert(obj);
+				}
 				this.unselect();
 			},
 			eventResize:function(event, delta, revertFunc) {
@@ -54,7 +60,7 @@ Template.main.helpers({
 		};
 	}
 });
-Template.main.created = function(){
+Template.schedule.created = function(){
 	this.observeSchedule = Schedule.find().observe({
 		added:function(){
 			$('#calendar').fullCalendar('refetchEvents');
@@ -67,6 +73,6 @@ Template.main.created = function(){
 		}
 	});
 };
-Template.main.destroyed = function(){
+Template.schedule.destroyed = function(){
 	this.observeSchedule.stop();
 }

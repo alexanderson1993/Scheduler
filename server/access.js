@@ -19,7 +19,7 @@ Users.allow({
 	},
 	update:function(userId, doc){
 		if (userId !== doc._id){
-			if (!Roles.userIsInRole(userId, ['admin'])){
+			if (!Roles.userHasRole(userId, 'admin')){
 				return false;
 			}
 		}
@@ -29,17 +29,17 @@ Users.allow({
 // Only Flight Directors (and admins) can change schedules.
 Schedule.allow({
 	insert:function(userId){
-		if (Roles.userIsInRole(userId, ['admin', 'flight-director'])){
+		if (Roles.userHasRole(userId, 'admin') || Roles.userHasRole(userId, 'flight-director') ){
 			return true;
 		}
 	},
 	update:function(userId, doc){
-		if (userId == doc.user || (Roles.userIsInRole(userId, ['admin']))){
+		if (userId == doc.user || (Roles.userHasRole(userId, 'admin'))){
 			return true;
 		}
 	},
 	remove:function(userId, doc){
-		if (Roles.userIsInRole(userId, ['admin'])){
+		if (Roles.userHasRole(userId, 'admin')){
 			if (userId !== doc.user){
 				return true;
 			}
@@ -55,7 +55,7 @@ Flight.allow({
 		}
 	},
 	update:function(userId, doc){
-		if (!Roles.userIsInRole(userId, ['admin'])){
+		if (!Roles.userHasRole(userId, 'admin')){
 			if (userId !== doc.flightDirector){
 				if (userId !== doc.user){
 					return false;
@@ -64,7 +64,7 @@ Flight.allow({
 		}
 	},
 	remove:function(userId, doc){
-		if (!Roles.userIsInRole(userId, ['admin'])){
+		if (!Roles.userHasRole(userId, 'admin')){
 			if (userId !== doc.flightDirector){
 				if (userId !== doc.user){
 					return false;
@@ -77,17 +77,17 @@ Flight.allow({
 // Only allow admins to change the flight types
 FlightType.allow({
 	insert:function(userId){
-		if (!Roles.userIsInRole(userId, ['admin'])){
+		if (!Roles.userHasRole(userId, 'admin')){
 			return false;
 		}
 	},
 	update:function(userId){
-		if (!Roles.userIsInRole(userId, ['admin'])){
+		if (!Roles.userHasRole(userId, 'admin')){
 			return false;
 		}
 	},
 	remove:function(userId){
-		if (!Roles.userIsInRole(userId, ['admin'])){
+		if (!Roles.userHasRole(userId, 'admin')){
 			return false;
 		}
 	}

@@ -9,7 +9,7 @@ AccountsTemplates.configure({
     // enforceEmailVerification: true,
     confirmPassword:true,
     continuousValidation:false,
-    // forbidClientAccountCreation: false,
+    forbidClientAccountCreation: false,
     // formValidationFeedback: true,
     // homeRoutePath: '/',
     showAddRemoveServices:true,
@@ -57,4 +57,15 @@ AccountsTemplates.addField({
 	type:'password',
 	required:true,
 	minLength:6,
+});
+
+// Running it in Meteor.startup is only necessary because Telescope
+// defines the route at startup
+Meteor.startup(function () {
+  // OR find a route by path
+  var route = RouterLayer.ironRouter.findFirstRoute('/admin/my-account');
+  // Override existing route options
+  _.extend(route.options, {
+    template:'accountIndex'
+});
 });

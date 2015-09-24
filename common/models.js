@@ -2,9 +2,45 @@ Schemas = {};
 Collections = {};
 
 Users = Collections.Users = Meteor.users;
-Schedule = Collections.Schedule = new Mongo.Collection('schedule');
+Schedule = Collections.Schedule = new orion.collection('schedule',{
+	singularName:'schedule',
+	pluralName:'schedules',
+	title:'Schedules',
+	link:{
+		title:'Schedules'
+	},
+	tabular: {
+		columns: [
+		{ data: "title", title: "Title" }
+		]
+	}
+});
 Flight = Collections.Flight = new Mongo.Collection('flight');
 FlightType = Collections.FlightType = new Mongo.Collection('flighttype');
+Links = Collections.Links = new orion.collection('links',{
+	singularName:'link',
+	pluralName:'links',
+	link:{
+		title:'Links'
+	},
+	tabular: {
+		columns: [
+		{ data: "title", title: "Title" }
+		]
+	}
+});
+Dictionary = Collections.Dictionary = new orion.collection('dictionaryo',{
+	singularName:'dictionary',
+	pluralName:'dictionaries',
+	link:{
+		title:'Dictionary'
+	},
+	tabular: {
+		columns: [
+		{ data: "title", title: "Title" }
+		]
+	}
+});
 pictureStore = new FS.Store.GridFS('profile-pictures', {
 	chunkSize:1024 * 1024,
 });
@@ -25,7 +61,8 @@ Pictures = Collections.Pictures = new FS.Collection('profile-pictures', {
 
 // This users schema is just for autoform, not for attaching
 // To the collection.
-Schemas.Profile = new SimpleSchema({
+// Schemas.Profile = new SimpleSchema
+Options.set('profileSchema',{
 	firstname:{
 		type:String
 	},
@@ -43,7 +80,7 @@ Schemas.Profile = new SimpleSchema({
 	userSince:{ // Also used for tracking flight director time
 		type:Date,
 		autoform:{
-			type:'bootstrap-datetimepicker'
+			type:'bootstrap-datepicker'
 		},
 		autoValue:function() {
 			if (this.isInsert) {
@@ -55,14 +92,14 @@ Schemas.Profile = new SimpleSchema({
 		type:Number,
 		optional:true
 	},
-	discountRate:{
+	/*discountRate:{
 		type:Number,
 		optional:true
 	},
-	hoursWorkes:{
+	hoursWorked:{
 		type:Number,
 		optional:true
-	},
+	},*/
 });
 
 Schemas.Schedule = new SimpleSchema({
@@ -70,7 +107,7 @@ Schemas.Schedule = new SimpleSchema({
 		type:Date,
 		autoform:{
 			afFieldInput:{
-				type:'bootstrap-datetimepicker'
+				type:'bootstrap-datepicker'
 			}
 		}
 	},
@@ -78,7 +115,7 @@ Schemas.Schedule = new SimpleSchema({
 		type:Date,
 		autoform:{
 			afFieldInput:{
-				type:'bootstrap-datetimepicker'
+				type:'bootstrap-datepicker'
 			}
 		}
 	},
@@ -181,6 +218,48 @@ Schemas.FlightType = new SimpleSchema({
 	}
 });
 
+Schemas.Links = new SimpleSchema({
+	title:{
+		type:String
+	},
+	path:{
+		type:String
+	},
+	parent:{
+		type:String,
+		regEx:SimpleSchema.RegEx.Id,
+		autoform:{
+			options:function() {
+				return _.map(Links.find().fetch(), function(link) {
+					return {
+						label:link.title,
+						value:link._id
+					};
+				});
+			}
+		}
+	}
+});
+
+Schemas.Dictionary = new SimpleSchema({
+	title:{
+		type:String
+	},
+	content:{
+		type:String,
+		autoform:{
+			rows:5
+		}
+	}
+});
+
 Collections.Schedule.attachSchema(Schemas.Schedule);
 Collections.Flight.attachSchema(Schemas.Flight);
 Collections.FlightType.attachSchema(Schemas.FlightType);
+Collections.Dictionary.attachSchema(Schemas.Dictionary);
+Collections.Links.attachSchema(Schemas.Links);
+Schedule.helpers({
+  forbiddenFields: function () {
+    return false;
+  }
+});

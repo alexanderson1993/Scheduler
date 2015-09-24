@@ -3,9 +3,7 @@ Router.configure({
 });
 
 Router.route('/', {
-	waitOn:function(){
-		Meteor.subscribe('schedule');
-	},
+	layoutTemplate:'front_layout',
 	action:function(){
 		this.render('main');
 	}
@@ -25,8 +23,19 @@ Router.route('/profile', {
 });
 
 Router.route('/schedule', {
-
+	waitOn:function(){
+		Meteor.subscribe('schedule');
+	},
+	action:function(){
+		this.render('schedule');
+	}
 });
+
+Router.route('/contact',{
+	action:function(){
+		this.render('contactForm');
+	}
+})
 /*
 Router.route('/admin', {
 	layoutTemplate:'admin_layout',

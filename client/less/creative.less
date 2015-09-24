@@ -1,0 +1,221 @@
+@import "theme.variables.less";
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
+
+body{
+    font-family: 'Lato';
+    font-weight: 400;
+    background-color: #000;
+}
+
+.navbar-default {
+    border-color: rgba(34,34,34,.05);
+    background-color: @navbar-default-bg;
+    border-bottom:solid 1px rgba(255,255,255,0.6);
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+}
+
+.navbar-default .navbar-header .navbar-brand {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff;
+}
+
+.navbar-default .navbar-toggle{
+    border-color:  lighten(@gray-light,30%);
+}
+.navbar-default .navbar-header .navbar-brand:hover,
+.navbar-default .navbar-header .navbar-brand:focus {
+    color: #fff;
+}
+
+.navbar-default .nav > li>a,
+.navbar-default .nav>li>a:focus {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    color: lighten(@gray-light,30%);
+}
+
+.navbar-default .nav > li>a:hover,
+.navbar-default .nav>li>a:focus:hover {
+    color: #fff;
+}
+
+.navbar-default .nav > li.active>a,
+.navbar-default .nav>li.active>a:focus {
+    color: #fff!important;
+    background-color: transparent;
+}
+
+.navbar-default .nav > li.active>a:hover,
+.navbar-default .nav>li.active>a:focus:hover {
+    background-color: transparent;
+}
+
+@media(min-width:768px) {
+    body{
+        overflow:hidden;
+    }
+    .navbar-default {
+        border-color: rgba(255,255,255,.3);
+        background-color: transparent;
+    }
+
+    .navbar-default .navbar-header .navbar-brand {
+        color: rgba(255,255,255,.7);
+    }
+
+    .navbar-default .navbar-header .navbar-brand:hover,
+    .navbar-default .navbar-header .navbar-brand:focus {
+        color: #fff;
+    }
+
+    .navbar-default .nav > li>a,
+    .navbar-default .nav>li>a:focus {
+        color: rgba(255,255,255,.7);
+    }
+
+    .navbar-default .nav > li>a:hover,
+    .navbar-default .nav>li>a:focus:hover {
+        color: #fff;
+    }
+
+    .navbar-default.affix {
+        border-color: rgba(34,34,34,.05);
+        background-color: @navbar-default-bg;
+    }
+
+    .navbar-default.affix .navbar-header .navbar-brand {
+        font-size: 14px;
+        color: #fff;
+    }
+
+    .navbar-default.affix .navbar-header .navbar-brand:hover,
+    .navbar-default.affix .navbar-header .navbar-brand:focus {
+        color: #fff;
+    }
+
+    .navbar-default.affix .nav > li>a,
+    .navbar-default.affix .nav>li>a:focus {
+        color: lighten(@gray-light,30%);
+    }
+
+    .navbar-default.affix .nav > li>a:hover,
+    .navbar-default.affix .nav>li>a:focus:hover {
+        color: #fff;
+    }
+}
+
+header {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    text-align: center;
+    color: #fff;
+    background-image: url(/main-bg.jpg);
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+header .header-content {
+    position: relative;
+    width: 100%;
+    padding: 100px 15px;
+    text-align: center;
+}
+
+header .header-content .header-content-inner h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+header .header-content .header-content-inner hr {
+    margin: 30px auto;
+}
+
+header .header-content .header-content-inner p {
+    margin-bottom: 50px;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,.7);
+}
+
+@media(min-width:768px) {
+    header {
+        min-height: 100vh;
+    }
+
+    header .header-content {
+        position: absolute;
+        top: 50%;
+        padding: 0 50px;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    header .header-content .header-content-inner {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 1000px;
+    }
+
+    header .header-content .header-content-inner p {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 80%;
+        font-size: 18px;
+    }
+}
+
+.section-heading {
+    margin-top: 0;
+}
+
+.btn {
+
+  font-weight: 300;
+  border-radius: 0;
+  &-default {
+    border-color: darken(@btn-default-bg, 3%);
+    background-color: @btn-default-bg;
+    &:hover {
+       border-color: darken(@btn-default-bg, 6%);
+       background-color: darken(@btn-default-bg, 3%);
+   }
+}
+&-primary {
+    border-color: darken(@btn-primary-bg, 3%);
+    background-color: @btn-primary-bg;
+    &:hover {
+       border-color: darken(@btn-primary-bg, 6%);
+       background-color: darken(@btn-primary-bg, 3%);
+       &:active{
+          border-color: darken(@btn-primary-bg, 9%);
+          background-color: darken(@btn-primary-bg, 6%);
+      }
+  }
+  &.disabled{
+      border-color: darken(@btn-primary-bg, 9%);
+      background-color: darken(@btn-primary-bg, 6%);
+  }
+  &[disabled]{
+      border-color: darken(@btn-primary-bg, 9%);
+      background-color: darken(@btn-primary-bg, 6%);
+  }
+
+}
+
+&-sm,
+&-xs {
+    font-size: 12px;
+}
+}
