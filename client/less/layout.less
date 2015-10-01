@@ -7,6 +7,9 @@
 #iron-router-progress.spinner:before {
 	border-color : @brand-primary;
 }
+.main-container{
+	margin-top:60px;
+}
 .background:after{
 	width: 1440px;
 	height: 600px;
@@ -16,6 +19,7 @@
 	position: fixed;
 	bottom: 0px;
 	left: 0px;
+	z-index:-1;
 }
 .background:before{
 	width: 800px;
@@ -26,4 +30,112 @@
 	position: fixed;
 	top: 0px;
 	left: 0px;
+	z-index:-1;
+}
+
+.pageContent{
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 5px 20px;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
+	overflow:auto;
+}
+.shop{
+	-webkit-column-count: 1;
+	-webkit-column-gap: 10px;
+	-webkit-column-fill: auto;
+	-moz-column-count: 1;
+	-moz-column-gap: 10px;
+	-moz-column-fill: auto;
+	column-count: 1;
+	column-gap: 15px;
+	column-fill: auto;
+	.thumbnail{
+		-webkit-column-break-inside: avoid;
+		-moz-column-break-inside: avoid;
+		column-break-inside: avoid;
+	}
+	margin-bottom:75px;
+}
+@media(min-width:768px) {
+	.shop{
+		-webkit-column-count: 3;
+		-webkit-column-gap: 10px;
+		-webkit-column-fill: auto;
+		-moz-column-count: 3;
+		-moz-column-gap: 10px;
+		-moz-column-fill: auto;
+		column-count: 3;
+		column-gap: 15px;
+		column-fill: auto;
+		.thumbnail{
+			-webkit-column-break-inside: avoid;
+			-moz-column-break-inside: avoid;
+			column-break-inside: avoid;
+		}
+		margin-bottom:75px;
+	}
+}
+.prizeTotal{
+	z-index: 10;
+	height:70px;
+	position:fixed;
+	bottom:0;
+	left: 0px;
+	right: 0px;
+	border-top:solid 1px rgba(255,255,255,0.5);
+	.btn{
+		margin-top:8px;
+	}
+}
+@supports (-webkit-backdrop-filter: blur(10px)) {
+	.prizeTotal{
+		-webkit-backdrop-filter: blur(10px);
+	}
+}
+
+@supports not (-webkit-backdrop-filter: blur(10px)) {
+	.prizeTotal{
+		background-color: rgba(0,0,0,0.6);
+	}
+}
+
+.faqs{
+	-webkit-column-count: 1;
+	-webkit-column-gap: 10px;
+	-webkit-column-fill: auto;
+	-moz-column-count: 1;
+	-moz-column-gap: 10px;
+	-moz-column-fill: auto;
+	column-count: 1;
+	column-gap: 15px;
+	column-fill: auto;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 5px 20px;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
+	overflow:auto;
+	.faqItem{
+		-webkit-column-break-inside: avoid;
+		-moz-column-break-inside: avoid;
+		column-break-inside: avoid;
+	}
+	margin-bottom:75px;
+}
+@media(min-width:768px) {
+	.faqs{
+		-webkit-column-count: 2;
+		-webkit-column-gap: 10px;
+		-webkit-column-fill: auto;
+		-moz-column-count: 2;
+		-moz-column-gap: 10px;
+		-moz-column-fill: auto;
+		column-count: 2;
+		column-gap: 15px;
+		column-fill: auto;
+		.faqItem{
+			-webkit-column-break-inside: avoid;
+			-moz-column-break-inside: avoid;
+			column-break-inside: avoid;
+		}
+		margin-bottom:75px;
+	}
 }

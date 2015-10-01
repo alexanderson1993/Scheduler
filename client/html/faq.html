@@ -1,0 +1,11 @@
+<template name="faq">
+	<h1>Frequently Asked Questions</h1>
+	<div class="faqs">
+		{{#each faq}}
+		<div class="faqItem">
+			<h3>{{title}}</h3>
+			{{{content}}}
+		</div>
+		{{/each}}
+	</div>
+</template>

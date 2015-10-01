@@ -15,8 +15,32 @@ Schedule = Collections.Schedule = new orion.collection('schedule',{
 		]
 	}
 });
+Mission = Collections.Mission = new orion.collection('mission',{
+	singularName:'mission',
+	pluralName:'missions',
+	title:'Missions',
+	link:{
+		title:'Missions'
+	},
+	tabular: {
+		columns: [
+		{ data: "name", title: "name" }
+		]
+	}
+});
 Flight = Collections.Flight = new Mongo.Collection('flight');
-FlightType = Collections.FlightType = new Mongo.Collection('flighttype');
+FlightType = Collections.FlightType = new orion.collection('flighttype',{
+	singularName:'flight type',
+	pluralName:'flight types',
+	link:{
+		title:'Flight Type'
+	},
+	tabular: {
+		columns: [
+		{ data: "name", title: "Name" }
+		]
+	}
+});
 Links = Collections.Links = new orion.collection('links',{
 	singularName:'link',
 	pluralName:'links',
@@ -38,6 +62,42 @@ Dictionary = Collections.Dictionary = new orion.collection('dictionaryo',{
 	tabular: {
 		columns: [
 		{ data: "title", title: "Title" }
+		]
+	}
+});
+Product = Collections.Product = new orion.collection('product',{
+	singularName:'product',
+	pluralName:'products',
+	link:{
+		title:'Products'
+	},
+	tabular: {
+		columns: [
+		{ data: "name", title: "Name" }
+		]
+	}
+});
+Faq = Collections.Faq = new orion.collection('faq',{
+	singularName:'faq',
+	pluralName:'faqs',
+	link:{
+		title:'Faqs'
+	},
+	tabular: {
+		columns: [
+		{ data: "title", title: "Title" }
+		]
+	}
+});
+Simulator = Collections.Simulator = new orion.collection('simulator',{
+	singularName:'simulator',
+	pluralName:'simulators',
+	link:{
+		title:'Simulators'
+	},
+	tabular: {
+		columns: [
+		{ data: "name", title: "Name" }
 		]
 	}
 });
@@ -213,6 +273,9 @@ Schemas.FlightType = new SimpleSchema({
 	name:{
 		type:String
 	},
+	slug:{
+		type:String
+	},
 	price:{
 		type:Number
 	}
@@ -223,10 +286,12 @@ Schemas.Links = new SimpleSchema({
 		type:String
 	},
 	path:{
-		type:String
+		type:String,
+		optional:true
 	},
 	parent:{
 		type:String,
+		optional:true,
 		regEx:SimpleSchema.RegEx.Id,
 		autoform:{
 			options:function() {
@@ -238,6 +303,23 @@ Schemas.Links = new SimpleSchema({
 				});
 			}
 		}
+	},
+	tab: {
+		type: Boolean,
+		defaultValue: false,
+		label: "Open in new tab"
+	},
+	role:{
+		type:String,
+		optional:true
+	},
+	order:{
+		type:Number,
+		autoValue:function() {
+			if (this.isInsert) {
+				return Links.find().count()+1;
+			}
+		},
 	}
 });
 
@@ -245,11 +327,102 @@ Schemas.Dictionary = new SimpleSchema({
 	title:{
 		type:String
 	},
-	content:{
+	content:orion.attribute('summernote', {
+		label: 'Content'
+	})
+});
+
+Schemas.Mission = new SimpleSchema({
+	name:{
+		type:String
+	},
+	description: orion.attribute('summernote', {
+		label: 'Description'
+	}),
+});
+
+Schemas.Product = new SimpleSchema({
+	name:{
+		type:String,
+		max:60
+	},
+	description:{
 		type:String,
 		autoform:{
 			rows:5
 		}
+	},
+	price:{
+		type:Number,
+		min:1
+	},
+	picture:{
+		type:String,
+		optional:true
+	},
+});
+
+Schemas.Faqs = new SimpleSchema({
+	title:{
+		type:String,
+		max:60
+	},
+	content:orion.attribute('summernote', {
+		label:'Content'
+	})
+});
+
+Schemas.Simulator = new SimpleSchema({
+	name:{
+		type:String,
+		max:60
+	},
+	description:orion.attribute('summernote', {
+		label:'Description'
+	}),
+	picture:{
+		type:String,
+		optional:true
+	},
+	minCrew:{
+		type:Number,
+		min:1
+	},
+	maxCrew:{
+		type:Number,
+		min:1
+	},
+	positions: {
+		type: Array,
+		optional: true,
+		minCount: 0,
+	},
+	"positions.$": {
+		type: Object
+	},
+	"positions.$.name": {
+		type: String
+	},
+	"positions.$.description":{
+		type:String,
+		optional:true
+	},
+	"positions.$.quantity": {
+		type: Number,
+		optional:true
+	},
+	"positions.$.difficulty":{
+		type: Number,
+		min:1,
+		max:5,
+		optional:true
+	},
+	"positions.$.responsibilities":{
+		type:Array,
+		optional:true
+	},
+	"positions.$.responsibilities.$": {
+		type: String
 	}
 });
 
@@ -258,8 +431,12 @@ Collections.Flight.attachSchema(Schemas.Flight);
 Collections.FlightType.attachSchema(Schemas.FlightType);
 Collections.Dictionary.attachSchema(Schemas.Dictionary);
 Collections.Links.attachSchema(Schemas.Links);
+Collections.Mission.attachSchema(Schemas.Mission);
+Collections.Product.attachSchema(Schemas.Product);
+Collections.Faq.attachSchema(Schemas.Faqs);
+Collections.Simulator.attachSchema(Schemas.Simulator);
 Schedule.helpers({
-  forbiddenFields: function () {
-    return false;
-  }
+	forbiddenFields: function () {
+		return false;
+	}
 });

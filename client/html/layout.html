@@ -4,12 +4,23 @@
 </body>
 
 <template name="front_layout">
+	<style>
+		@media(min-width:768px) {
+			body{
+				overflow:hidden;
+			}
+		}
+	</style>
+	{{> styleDark}}
 	{{> nav}}
 	{{> yield}}
 </template>
 
 <template name="main_layout">
-	<div class="background"></div>
+	{{> styleDark}}
 	{{>nav}}
-	{{>yield}}
+	<div class="container main-container">
+		{{>yield}}
+	</div>
+	<div class="background"></div>
 </template>

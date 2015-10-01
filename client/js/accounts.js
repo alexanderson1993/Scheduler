@@ -24,7 +24,7 @@ AccountsTemplates.configure({
     // privacyUrl: 'privacy',
     // termsUrl: 'terms-of-use',
 });
-
+/*
 AccountsTemplates.configureRoute('changePwd');
 AccountsTemplates.configureRoute('enrollAccount');
 AccountsTemplates.configureRoute('forgotPwd');
@@ -32,7 +32,7 @@ AccountsTemplates.configureRoute('resetPwd');
 AccountsTemplates.configureRoute('signIn');
 AccountsTemplates.configureRoute('signUp');
 AccountsTemplates.configureRoute('verifyEmail');
-
+*/
 AccountsTemplates.removeField('email');
 AccountsTemplates.addFields([
 {

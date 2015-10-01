@@ -1,0 +1,14 @@
+<template name="pageTemplate">
+	<div class="pageContent">
+		{{{content}}}
+	</div>
+</template>
+
+<template name="missions">
+	<h2>Missions</h2>
+	{{#each mission}}
+	<h3>{{name}}</h3>
+	{{{description}}}
+	<img src="{{image}}" />
+	{{/each}}
+</template>

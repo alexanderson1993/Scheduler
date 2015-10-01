@@ -31,7 +31,15 @@ Meteor.publish(null,function(){
 Meteor.publish('schedule', function(){
 	return Schedule.find();
 });
-
+Meteor.publish('mission',function(){
+	return Mission.find();
+});
+Meteor.publish('product',function(){
+	return Product.find();
+});
+Meteor.publish('faq',function(){
+	return Faq.find();
+});
 Meteor.publish('flight', function(userId){
 	var output;
 	if (Roles.userHasRole(userId, 'admin')){
@@ -41,7 +49,9 @@ Meteor.publish('flight', function(userId){
 	}
 	return output;
 });
-
+Meteor.publish('flighttype',function(){
+	return FlightType.find();
+})
 Meteor.publish(null, function(){
 	return [FlightType.find(), Pictures.find()];
 });

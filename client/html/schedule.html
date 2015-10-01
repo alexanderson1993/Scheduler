@@ -1,6 +1,57 @@
 <template name="schedule">
-	<span class="pull-right">
-		{{> atNavButton}}
-	</span>
 	{{> fullcalendar options}}
+</template>
+
+<template name="book">
+	{{> Template.dynamic template=currentTemplate}}
+</template>
+
+<template name="flightTypeChoice">
+	<style>
+		.vertCenter{
+			display:flex;
+			flex-direction: row;
+			justify-content: center;
+			margin-top: 20px;
+		}
+	</style>
+	<div class="row">
+		<div class="col-sm-12">
+			<h1><a style="visibility:hidden" href="#"><i class="fa fa-fw fa-arrow-circle-o-left"></i></a> Step 1: Choose your mission length</h1>
+		</div>
+	</div>
+	<div class="row vertCenter">
+		{{#each flightType}}
+		<div class="col-sm-4">
+			<a href="#" class="thumbnail text-center">
+				<div class="caption">
+					<h3>{{name}}</h3>
+					<h5>${{price}}</h5>
+				</div>
+			</a>
+		</div>
+		{{/each}}
+	</div>
+</template>
+
+<template name="missionTimeChoice">
+	<div class="row">
+		<div class="col-sm-12">
+			<h1><a href="#"><i class="back fa fa-fw fa-arrow-circle-o-left"></i></a> Step 2: Choose your mission time <small>{{name}}</small></h1>
+		</div>
+	</div>
+	{{> fullcalendar options}}
+</template>
+
+<template name="missionPayment">
+	<div class="row">
+		<div class="col-sm-12">
+			<h1><a href="#"><i class="back fa fa-fw fa-arrow-circle-o-left"></i></a> Step 3: Enter Payment Details</h1>
+		</div>
+	</div>
+	<div class="row">
+	<div class="modal-content col-sm-6 col-sm-offset-3">
+			{{> paymentBooking}}
+		</div>
+	</div>
 </template>

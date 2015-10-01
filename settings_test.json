@@ -1,0 +1,14 @@
+{
+  "public" : {
+    "stripe": {
+      "publishable_key": "pk_test_EnEtkme2yg7oGj3VICjt180n"
+    }
+  },
+  "stripe": {
+    "secret_key": "sk_test_6te6CrrplnIJS6dcLA7YLYMM"
+  },
+ "email": {
+    "from": "noreply@farpointstation.org",
+    "notifyTo": ["alex@infinitedev.com"]
+  }
+}

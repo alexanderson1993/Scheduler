@@ -30,6 +30,11 @@ Template.schedule.helpers({
 			timezone:'UTC',
 			editable:true,
 			events:events,
+			height: document.height - document.height/10,
+			allDaySlot:false,
+			minTime:"06:00:00",
+			maxTime:"23:00:00",
+			slotDuration:"00:15:00",
 			selectable:true,
 			selectHelper:true,
 			select:function(start, end){
@@ -75,4 +80,6 @@ Template.schedule.created = function(){
 };
 Template.schedule.destroyed = function(){
 	this.observeSchedule.stop();
-}
+};
+
+

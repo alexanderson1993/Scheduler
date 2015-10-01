@@ -4,6 +4,19 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+jquery
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check
 http
 less
 fortawesome:fontawesome
@@ -30,18 +43,12 @@ cfs:filesystem
 rzymek:fullcalendar
 orionjs:core
 orionjs:bootstrap
+orionjs:pages
+orionjs:summernote
 alexanderson1993:please.js
 standard-minifiers
-meteor-base
-mobile-experience
-mongo
-blaze-html-templates
-session
-jquery
-tracker
-logging
-reload
-random
-ejson
-spacebars
-check
+rgoomar:bootstrap-validator
+dburles:google-maps
+mirrorcell:card
+infinitedg:stripe
+cmather:handlebars-server

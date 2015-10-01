@@ -1,5 +1,10 @@
+
 Router.configure({
-	layoutTemplate:'main_layout'
+	layoutTemplate:'main_layout',
+	onBeforeAction:function(){
+		$('.navbar-collapse').removeClass('in');
+		this.next();
+	}
 });
 
 Router.route('/', {
@@ -8,7 +13,14 @@ Router.route('/', {
 		this.render('main');
 	}
 });
-
+Router.route('/missions', {
+	waitOn:function(){
+		return Meteor.subscribe('mission');
+	},
+	action:function(){
+		this.render('missions');
+	}
+});
 Router.route('/profile', {
 	waitOn:function(){
 		return Meteor.subscribe('users', Meteor.userId());
@@ -17,11 +29,29 @@ Router.route('/profile', {
 		if (Meteor.userId()){
 			this.render('user_profile');
 		} else {
-			Router.go('/sign-in');
+			Router.go('/login');
 		}
 	}
 });
-
+Router.route('/book/', {
+	waitOn:function(){
+		return [Meteor.subscribe('flighttype'),Meteor.subscribe('schedule')];
+	},
+	data:function(){
+		return Session.get('pendingBooking');
+	},
+	action:function(){
+		this.render('book');
+	}
+});
+Router.route('/shop', {
+	waitOn:function(){
+		Meteor.subscribe('product');
+	},
+	actions:function(){
+		this.render('shop');
+	}
+});
 Router.route('/schedule', {
 	waitOn:function(){
 		Meteor.subscribe('schedule');
@@ -30,53 +60,27 @@ Router.route('/schedule', {
 		this.render('schedule');
 	}
 });
-
-Router.route('/contact',{
+Router.route('/faq', {
+	waitOn:function(){
+		Meteor.subscribe('faq');
+	},
+	action:function(){
+		this.render('faq');
+	}
+});
+Router.route('/contact', {
 	action:function(){
 		this.render('contactForm');
-	}
-})
-/*
-Router.route('/admin', {
-	layoutTemplate:'admin_layout',
+	},
+});
+Router.route('/login', {
 	action:function(){
-		if (!Roles.userIsInRole(Meteor.userId(), ['admin'])){
-			Router.go('/sign-in');
-		} else {
-			this.render('admin');
-		}
+		this.render('login');
 	}
 });
-
-Router.route('/admin/users', {
-	layoutTemplate:'admin_layout',
-	waitOn:function(){
-		return Meteor.subscribe('users',Meteor.userId());
-	},
+Router.route('/sign-out',{
 	action:function(){
-		if (!Roles.userIsInRole(Meteor.userId(), ['admin'])){
-			Router.go('/sign-in');
-		} else {
-			this.render('admin_users');
-		}
+		Meteor.logout();
+		Router.go('/')
 	}
 });
-
-Router.route('/admin/user/:userId', {
-	layoutTemplate:'admin_layout',
-	waitOn:function(){
-		return Meteor.subscribe('users',Meteor.userId());
-	},
-	data:function(){
-		if (Users.findOne({_id:this.params.userId})){
-			return Users.findOne({_id:this.params.userId}).profile;
-		}
-	},
-	action:function(){
-		if (!Roles.userIsInRole(Meteor.userId(), ['admin'])){
-			Router.go('/sign-in');
-		} else {
-			this.render('admin_user_profile');
-		}
-	}
-});*/
