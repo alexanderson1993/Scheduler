@@ -34,14 +34,27 @@ Router.route('/profile', {
 	}
 });
 Router.route('/book/', {
+	onBeforeAction:function(){
+		if (!Meteor.userId()){
+			Session.set('redirectURL','/book');
+			Router.go('/login');
+		} else {
+			this.next();
+		}
+	},
 	waitOn:function(){
-		return [Meteor.subscribe('flighttype'),Meteor.subscribe('schedule')];
+		return [Meteor.subscribe('flighttype'), Meteor.subscribe('schedule'), Meteor.subscribe('victor_roles')];
 	},
 	data:function(){
 		return Session.get('pendingBooking');
 	},
 	action:function(){
 		this.render('book');
+	}
+});
+Router.route('/bookingSubmit', {
+	action:function(){
+		this.render('submitAnimation');
 	}
 });
 Router.route('/shop', {

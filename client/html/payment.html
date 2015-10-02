@@ -5,57 +5,7 @@
 	</div>
 	<div class="modal-body">
 		<div class="payment-card">
-			<div class="card-wrapper"></div>
-
-			<div class="form-container active">
-				<form action="">
-					<div class="form-group">
-						<label for="number">
-							CARD NUMBER
-						</label>
-						<div class="input-group">
-							<input type="text" class="form-control" name="number" placeholder="Valid Card Number"
-							required />
-							<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-6 col-md-6">
-							<div class="form-group">
-								<label for="card_firstName">
-									Name
-								</label>
-								<input type="text" class="form-control" name="card_firstName" placeholder="First Name" required />
-							</div>
-						</div>
-						<div class="col-xs-6 col-md-6 pull-right">
-							<div class="form-group">
-								<label for="card_firstName">&nbsp;</label>
-								<input type="text" class="form-control" name="card_lastName" placeholder="Last Name" required />
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-7 col-md-7">
-							<div class="form-group">
-								<label for="expiry">
-									EXPIRY DATE
-								</label>
-								<input type="text" class="form-control" name="expiry" placeholder="MM / YY" required />
-							</div>
-						</div>
-						<div class="col-xs-5 col-md-5 pull-right">
-							<div class="form-group">
-								<label for="cvc">
-									CV CODE
-								</label>
-								<input type="text" class="form-control" name="cvc" placeholder="CVC" required />
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-
+			{{> paymentBody}}
 			<div class="row">
 				<div class="col-md-12">
 					<h3 class="text-right">Total charge: ${{ totalPaymentAmount }}</h3>
@@ -83,60 +33,10 @@
 <template name="paymentBooking">
 	<div class="modal-body">
 		<div class="payment-card">
-			<div class="card-wrapper"></div>
-
-			<div class="form-container active">
-				<form action="">
-					<div class="form-group">
-						<label for="number">
-							CARD NUMBER
-						</label>
-						<div class="input-group">
-							<input type="text" class="form-control" name="number" placeholder="Valid Card Number"
-							required />
-							<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-6 col-md-6">
-							<div class="form-group">
-								<label for="card_firstName">
-									Name
-								</label>
-								<input type="text" class="form-control" name="card_firstName" placeholder="First Name" required />
-							</div>
-						</div>
-						<div class="col-xs-6 col-md-6 pull-right">
-							<div class="form-group">
-								<label for="card_firstName">&nbsp;</label>
-								<input type="text" class="form-control" name="card_lastName" placeholder="Last Name" required />
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-7 col-md-7">
-							<div class="form-group">
-								<label for="expiry">
-									EXPIRY DATE
-								</label>
-								<input type="text" class="form-control" name="expiry" placeholder="MM / YY" required />
-							</div>
-						</div>
-						<div class="col-xs-5 col-md-5 pull-right">
-							<div class="form-group">
-								<label for="cvc">
-									CV CODE
-								</label>
-								<input type="text" class="form-control" name="cvc" placeholder="CVC" required />
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-
+			{{> paymentBody}}
 			<div class="row">
 				<div class="col-md-12">
-					<h3 class="text-right">Total charge: ${{ totalPaymentAmount }}</h3>
+					<h3>Total charge: ${{ totalPaymentAmount }}</h3>
 					<div class="disclaimer">Credit card processing is handled by <a href="http://stripe.com" target="_blank">Stripe</a>, a secure third-party service. Your credit card information is not stored by the Space Education Center Foundation.
 					</div>
 				</div>
@@ -149,12 +49,58 @@
 			{{/each}}
 		</ul>
 	</div>
-	<div class="modal-footer">
-		{{#if buttonsDisabled}}
-		<img src="/assets/img/ajax-loader.gif">
-		{{/if}}
-		<button type="button" class="btn btn-default" data-dismiss="modal" disabled="{{buttonsDisabled}}">Close</button>
-		<button type="button" class="btn btn-success submit-button" disabled="{{buttonsDisabled}}">Submit</button>
+</template>
+
+<template name="paymentBody">
+	<div class="card-wrapper"></div>
+
+	<div class="form-container active">
+		<form action="">
+			<div class="form-group">
+				<label for="number">
+					CARD NUMBER
+				</label>
+				<div class="input-group">
+					<input type="text" class="form-control" name="number" placeholder="Valid Card Number"
+					required />
+					<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 col-md-6">
+					<div class="form-group">
+						<label for="card_firstName">
+							Name
+						</label>
+						<input type="text" class="form-control" name="card_firstName" placeholder="First Name" required />
+					</div>
+				</div>
+				<div class="col-xs-6 col-md-6 pull-right">
+					<div class="form-group">
+						<label for="card_firstName">&nbsp;</label>
+						<input type="text" class="form-control" name="card_lastName" placeholder="Last Name" required />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-7 col-md-7">
+					<div class="form-group">
+						<label for="expiry">
+							EXPIRY DATE
+						</label>
+						<input type="text" class="form-control" name="expiry" placeholder="MM / YY" required />
+					</div>
+				</div>
+				<div class="col-xs-5 col-md-5 pull-right">
+					<div class="form-group">
+						<label for="cvc">
+							CV CODE
+						</label>
+						<input type="text" class="form-control" name="cvc" placeholder="CVC" required />
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 </template>
 

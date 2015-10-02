@@ -12,6 +12,15 @@ body{
     .navbar-default,.dropdown-menu{
         -webkit-backdrop-filter: blur(10px);
     }
+    .modal{
+        transition:-webkit-backdrop-filter 0.5s ease-in-out;
+        -webkit-backdrop-filter: blur(0px) grayscale(0%);
+        opacity: 0;
+    }
+    .modal.in{
+        -webkit-backdrop-filter: blur(5px) grayscale(100%);
+        opacity: 1;
+    }
 }
 
 .navbar-default {
@@ -223,25 +232,25 @@ header .header-content .header-content-inner p {
     background-color: @btn-default-bg;
     color:#fff;
     &:hover {
-     border-color: darken(@btn-default-bg, 6%);
-     background-color: darken(@btn-default-bg, 3%);
- }
+       border-color: darken(@btn-default-bg, 6%);
+       background-color: darken(@btn-default-bg, 3%);
+   }
 }
 &-primary {
     border-color: darken(@btn-primary-bg, 3%);
     background-color: @btn-primary-bg;
     &:hover {
-     border-color: darken(@btn-primary-bg, 6%);
-     background-color: darken(@btn-primary-bg, 3%);
-     &:active{
+       border-color: darken(@btn-primary-bg, 6%);
+       background-color: darken(@btn-primary-bg, 3%);
+       &:active{
+          border-color: darken(@btn-primary-bg, 9%);
+          background-color: darken(@btn-primary-bg, 6%);
+      }
+  }
+  &.disabled,&[disabled]{
       border-color: darken(@btn-primary-bg, 9%);
       background-color: darken(@btn-primary-bg, 6%);
   }
-}
-&.disabled,&[disabled]{
-  border-color: darken(@btn-primary-bg, 9%);
-  background-color: darken(@btn-primary-bg, 6%);
-}
 
 }
 
@@ -283,6 +292,10 @@ header .header-content .header-content-inner p {
     input[type="text"]:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="password"]:focus, textarea:focus, textarea:focus {
         box-shadow: 0px 0px 5px  rgba(0,100,255,0.75);
         transition: all 0.5s ease;
+    }
+    .form-control.has-error:not(.card-valid){
+        box-shadow: 0px 0px 5px  rgba(255,0,0,0.75);
+        background-color: rgba(255, 100, 100, 0.3);
     }
 }
 .modal-content{

@@ -26,18 +26,21 @@ Meteor.publish('flightDirectors', function(userId){
 });*/
 
 Meteor.publish(null,function(){
-	return [Dictionary.find(),Links.find()];
+	return [Dictionary.find(), Links.find()];
+});
+Meteor.publish('victor_roles', function () {
+  return Roles._collection.find({'roles':{$all:['victor']}});
 });
 Meteor.publish('schedule', function(){
 	return Schedule.find();
 });
-Meteor.publish('mission',function(){
+Meteor.publish('mission', function(){
 	return Mission.find();
 });
-Meteor.publish('product',function(){
+Meteor.publish('product', function(){
 	return Product.find();
 });
-Meteor.publish('faq',function(){
+Meteor.publish('faq', function(){
 	return Faq.find();
 });
 Meteor.publish('flight', function(userId){

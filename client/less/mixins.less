@@ -81,7 +81,17 @@
 	-moz-animation:    @name @duration @delay @ease;
 	-ms-animation:     @name @duration @delay @ease;
 }
-
+.keyframes(@name) {
+    @-webkit-keyframes @name {
+        .-frames(-webkit-);
+    }
+    @-moz-keyframes @name {
+        .-frames(-moz-);
+    }
+    @keyframes @name {
+        .-frames();
+    }
+}
 .transition (@transition) {
 	-webkit-transition: @transition;  
 	-moz-transition:    @transition;

@@ -2,6 +2,7 @@ Schemas = {};
 Collections = {};
 
 Users = Collections.Users = Meteor.users;
+Transactions = Collections.Transactions = new Mongo.Collection('transactions');
 Schedule = Collections.Schedule = new orion.collection('schedule',{
 	singularName:'schedule',
 	pluralName:'schedules',
@@ -28,7 +29,18 @@ Mission = Collections.Mission = new orion.collection('mission',{
 		]
 	}
 });
-Flight = Collections.Flight = new Mongo.Collection('flight');
+Flight = Collections.Flight = new orion.collection('flight', {
+	singularName:'flight',
+	pluralName:'flights',
+	link:{
+		title:'Flights'
+	},
+	tabular: {
+		columns: [
+		{ data: "start", title: "Start" }
+		]
+	}
+});
 FlightType = Collections.FlightType = new orion.collection('flighttype',{
 	singularName:'flight type',
 	pluralName:'flight types',
@@ -213,10 +225,17 @@ Schemas.Schedule = new SimpleSchema({
 });
 
 Schemas.Flight = new SimpleSchema({
-	starttime:{
+	start:{
 		type:Date
 	},
-	type:{
+	end:{
+		type:Date
+	},
+	notes:{
+		type:String,
+		optional:true
+	},
+	flightType:{
 		type:String,
 		regEx:SimpleSchema.RegEx.Id,
 		autoform:{
@@ -233,6 +252,7 @@ Schemas.Flight = new SimpleSchema({
 	flightDirector:{
 		type:String,
 		regEx:SimpleSchema.RegEx.Id,
+		optional:true,
 		autoform:{
 			options:function() {
 				return _.map(Meteor.users.find({'roles':{$elemMatch:{$eq:'flight-director'}}}).fetch(), function(user) {

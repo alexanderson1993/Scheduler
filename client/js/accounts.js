@@ -23,6 +23,17 @@ AccountsTemplates.configure({
     // Privacy Policy and Terms of Use
     // privacyUrl: 'privacy',
     // termsUrl: 'terms-of-use',
+    onSubmitHook:function(error, state){
+        if (!error) {
+            if (Session.get('redirectURL')){
+               // GAnalytics.event("account","Sign In");
+               Router.go(Session.get('redirectURL'));
+               Session.set('redirectURL', null);
+           } else {
+            Router.go('/');
+        }
+    }
+}
 });
 /*
 AccountsTemplates.configureRoute('changePwd');
@@ -33,6 +44,7 @@ AccountsTemplates.configureRoute('signIn');
 AccountsTemplates.configureRoute('signUp');
 AccountsTemplates.configureRoute('verifyEmail');
 */
+
 AccountsTemplates.removeField('email');
 AccountsTemplates.addFields([
 {

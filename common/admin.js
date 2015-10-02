@@ -28,6 +28,8 @@ ReactiveTemplates.set('collections.faq.create', 'collectionCreate');
 ReactiveTemplates.set('collections.faq.update', 'collectionUpdate');
 ReactiveTemplates.set('collections.simulator.create', 'collectionCreate');
 ReactiveTemplates.set('collections.simulator.update', 'collectionUpdate');
+ReactiveTemplates.set('collections.flight.create', 'collectionCreate');
+ReactiveTemplates.set('collections.flight.update', 'collectionUpdate');
 Meteor.settings.contactForm = {
 	emailTo:'alex@infinitedev.com'
 };

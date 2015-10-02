@@ -26,6 +26,13 @@ Users.allow({
 	}
 });
 
+Transactions.allow({
+	insert:function(userId){
+		if (userId){
+			return true;
+		}
+	}
+})
 // Only Flight Directors (and admins) can change schedules.
 Schedule.allow({
 	insert:function(userId){

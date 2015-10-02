@@ -46,12 +46,40 @@
 <template name="missionPayment">
 	<div class="row">
 		<div class="col-sm-12">
-			<h1><a href="#"><i class="back fa fa-fw fa-arrow-circle-o-left"></i></a> Step 3: Enter Payment Details</h1>
+			<h1><a href="#"><i class="back fa fa-fw fa-arrow-circle-o-left"></i></a> Step 3: Confirm Mission Details</h1>
 		</div>
 	</div>
 	<div class="row">
-	<div class="modal-content col-sm-6 col-sm-offset-3">
+		<div class="col-sm-5">
+			<h3>Details:</h3>
+			<p>Mission Type: {{type}}</p>
+			<p>Start Time: {{start}}</p>
+			<p>End Time: {{end}}</p>
+			<p>Notes:</p>
+			<textarea name="notes" style="resize: none" class="form-control" rows="5"></textarea>
+		</div>
+		<div class="col-sm-6 col-sm-offset-1">
 			{{> paymentBooking}}
+			{{#each paymentErrors}}
+			<p class="text-danger">
+				{{this}}
+			</p>
+			{{/each}}
+		</div>
+	</div>
+	<div class="pull-right">
+		<button type="button" class="btn btn-success btn-lg submit-button" disabled="{{buttonsDisabled}}">Book & Pay</button>
+	</div>
+</template>
+
+<template name="submitAnimation">
+	<div class="submitAnimation">
+		<div id="loading">
+			<div id="innerText" class="flip">&#8756;</div>
+			<div class="circle ani-spin"></div>
+		</div>
+		<div class="load">
+			<h2>...Processing...</h2>
 		</div>
 	</div>
 </template>
