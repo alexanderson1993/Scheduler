@@ -37,7 +37,9 @@ Flight = Collections.Flight = new orion.collection('flight', {
 	},
 	tabular: {
 		columns: [
-		{ data: "start", title: "Start" }
+		{ data: "start", title: "Start" },
+		{ data: "end", title: "End" }
+
 		]
 	}
 });
@@ -113,6 +115,19 @@ Simulator = Collections.Simulator = new orion.collection('simulator',{
 		]
 	}
 });
+MissionRequest = Collections.MissionRequest = new orion.collection('missionrequest',{
+	singularName:'mission request',
+	pluralName:'mission requests',
+	link:{
+		title:'Mission Requests'
+	},
+	tabular: {
+		columns: [
+		{ data: "name", title: "Name" },
+		{ data: "misionTime", title: "Date" }
+		]
+	}
+});
 pictureStore = new FS.Store.GridFS('profile-pictures', {
 	chunkSize:1024 * 1024,
 });
@@ -123,7 +138,7 @@ var imageStore = new FS.Store.FileSystem("images", {
 });
 
 Pictures = Collections.Pictures = new FS.Collection('profile-pictures', {
-	stores:[imageStore],
+	stores:[pictureStore],
 	filter:{
 		allow:{
             contentTypes:['image/*'] // allow only images in this FS.Collection
@@ -131,14 +146,25 @@ Pictures = Collections.Pictures = new FS.Collection('profile-pictures', {
     }
 });
 
+MissionPictures = Collections.MissionPictures = new FS.Collection('missionPictures',{
+	stores:[pictureStore],
+	filter:{
+		allow:{
+            contentTypes:['image/*'] // allow only images in this FS.Collection
+        }
+    }
+});
 // This users schema is just for autoform, not for attaching
 // To the collection.
 // Schemas.Profile = new SimpleSchema
 Options.set('profileSchema',{
-	firstname:{
+	name:{
 		type:String
 	},
-	lastname:{
+	firstName:{
+		type:String
+	},
+	lastName:{
 		type:String
 	},
 	email:{
@@ -147,7 +173,6 @@ Options.set('profileSchema',{
 	},
 	picture:{
 		type:String,
-		regEx:SimpleSchema.RegEx.Url
 	},
 	userSince:{ // Also used for tracking flight director time
 		type:Date,
@@ -356,6 +381,10 @@ Schemas.Mission = new SimpleSchema({
 	name:{
 		type:String
 	},
+	picture:{
+		type:String,
+		optional:true,
+	},
 	description: orion.attribute('summernote', {
 		label: 'Description'
 	}),
@@ -445,6 +474,42 @@ Schemas.Simulator = new SimpleSchema({
 		type: String
 	}
 });
+Schemas.MissionRequest = new SimpleSchema({
+	name:{
+		type:String,
+		autoform:{
+			readonly:true
+		}
+	},
+	email:{
+		type:String,
+		regEx:SimpleSchema.RegEx.Email,
+		autoform:{
+			readonly:true
+		}
+	},
+	flightType:{
+		type:String,
+		autoform:{
+			readonly:true
+		}
+	},
+	missionTime:{
+		type:Date,
+		autoform:{
+			afFieldInput: {
+				type:'bootstrap-datetimepicker',
+			}
+		},
+	},
+	notes:{
+		type:String,
+		autoform:{
+			rows:5
+		},
+		optional:true
+	}
+});
 
 Collections.Schedule.attachSchema(Schemas.Schedule);
 Collections.Flight.attachSchema(Schemas.Flight);
@@ -455,8 +520,13 @@ Collections.Mission.attachSchema(Schemas.Mission);
 Collections.Product.attachSchema(Schemas.Product);
 Collections.Faq.attachSchema(Schemas.Faqs);
 Collections.Simulator.attachSchema(Schemas.Simulator);
+Collections.MissionRequest.attachSchema(Schemas.MissionRequest)
 Schedule.helpers({
 	forbiddenFields: function () {
 		return false;
 	}
 });
+if (Meteor.isClient){
+	Template.registerHelper("Schemas", Schemas);
+	Template.registerHelper("Collections", Collections);
+}

@@ -1,47 +1,94 @@
-if (Meteor.isClient) {
-
-
-	Template.user_profile.helpers({
-		selectedPersonDoc: function () {
-			if (typeof Meteor.user() !== 'undefined')
-				return Meteor.user().profile;
-		},
-		formType: function () {
+Template.user_profile.helpers({
+	selectedPersonDoc:function() {
+		if (typeof Meteor.user() !== 'undefined'){
+			console.log(Meteor.user().profile);
+			return Meteor.user().profile;
+		}
+	},
+	formType: function() {
 		//	if (Meteor.userId()) {
 			//	return "update";
 			//} else {
 				return "disabled";
 		//	}
 	},
-	userPicture: function(){
+	userPicture:function(){
 		var user = Meteor.user();
-		if (!user)
+		if (!user){
 			return '';
-
-		if (user.profile && user.profile.picture)
+		}
+		if (user.profile && user.profile.picture){
 			return user.profile.picture;
-			//return picture.findOne(user.profile.picture).url();
-		else
-			return "/avatar.jpeg";
-
+		} else{
+			return 'http://placehold.it/500?text=No+Picture';
+		}
 		return '';
 	},
-	profile: function(){
+	profile:function(){
 		return Meteor.user().profile;
 	},
 	schema:function(){
-		return Schemas.Profile;
+		return new SimpleSchema({
+			firstName:{
+				type:String
+			},
+			lastName:{
+				type:String
+			},
+			email:{
+				type:String,
+				regEx:SimpleSchema.RegEx.Email
+			},
+			phoneNumber:{
+				type:String,
+				optional:true,
+			},
+			userSince:{ // Also used for tracking flight director time
+				type:Date,
+				autoform:{
+					type:'bootstrap-datepicker',
+					readonly:true
+				},
+				autoValue:function() {
+					if (this.isInsert) {
+						return new Date();
+					}
+				}
+			},
+			bio:{
+				type:String,
+				autoform:{
+					rows:5
+				},
+				optional:true
+			}
+		});
 	}
 });
-	Template.user_profile.events({
-		'click #updateProfile': function(e,t){
-			var obj = Meteor.user().profile || {};
+Template.user_profile.events({
+	'change #file':function(e,t){
+		var file;
+		e.preventDefault();
+		e.stopPropagation();
+		file = e.target.files[0];
+		Pictures.insert(file,function(err,img){
+			var interval = Meteor.setInterval(function(){
+				var url = (img.url());
+				var userProfile = Meteor.user().profile;
+				userProfile.picture = url;
+				Meteor.users.update({_id:Meteor.userId()},{$set:{profile:userProfile}});
+				Meteor.clearInterval(interval);
+			}, 1000);
+		});
+	},
+	'click #updateProfile':function(e,t){
+		var obj = Meteor.user().profile || {};
 
-			obj.firstName = t.find('input[name="firstName"]').value;
-			obj.lastName = t.find('input[name="lastName"]').value;
-			obj.name = obj.firstName + " " + obj.lastName;
-			obj.email = t.find('input[name="email"]').value;
-			obj.birthdate = t.find('input[name="birthdate"]').value;
+		obj.firstName = t.find('input[name="firstName"]').value;
+		obj.lastName = t.find('input[name="lastName"]').value;
+		obj.name = obj.firstName + " " + obj.lastName;
+		obj.email = t.find('input[name="email"]').value;
+		obj.birthdate = t.find('input[name="birthdate"]').value;
 
 			//User Fixtures
 			obj.team = obj.team || null;
@@ -56,4 +103,3 @@ if (Meteor.isClient) {
 			$('.modal').modal();
 		}
 	})
-}

@@ -1,44 +1,57 @@
 <template name="user_profile">
 	<h1>Profile</h1>
+	<style>
+		.replacePhoto{
+			position: absolute;
+			text-align: center;
+			bottom: 30px;
+			left: 0px;
+			width: 100%;
+			padding-top: 100px;
+			text-shadow: 2px 2px 2px #000;
+			opacity:0;
+			transition:opacity 0.2s ease-in-out;
+		}
+		.thumbnail:hover .replacePhoto{
+			opacity:1;
+		}
+	</style>
 	<div class="row">
-		<div class="col-sm-6">
-			<img class="profilePicture img-responsive" draggable='false' src={{userPicture}} />
-			<label  class="profileOverlay">Click to upload image</label>
+		<div class="col-sm-4">
+			<label class="file">
+				<input type="file" id="file" style="position:absolute; width:100%; height:500px; opacity:0;" aria-label="File browser example">
+				<div class="thumbnail" style="font-weight: 400;">
+					<img src={{userPicture}} style="width:100%;" />
+					<div class="replacePhoto">Click or drag and drop to upload a new picture</div>
+				</div>
+			</label>
 		</div>
-		{{#autoForm id="afInsertDemo" type=formType
-		doc=selectedPersonDoc schema=schema}}
-		<div class="form-group col-sm-6 {{#if afFieldIsInvalid name='firstname'}}has-error{{/if}}">
-			<label class="control-label">{{afFieldLabelText name='firstname'}}</label>
-			{{> afFieldInput name='firstname'}}
-			{{#if afFieldIsInvalid name='firstname'}}
-			<span class="help-block">{{{afFieldMessage name='firstname'}}}</span>
-			{{/if}}
+		<div class="col-sm-7 col-sm-offset-1">
+			<div class="row">
+				{{#autoForm id="demo" schema=schema doc=selectedPersonDoc}}
+				<div class="col-sm-6">
+					{{> afQuickField name="firstName"}}
+				</div>
+				<div class="col-sm-6">
+					{{> afQuickField name="lastName"}}
+				</div>
+				<div class="col-sm-6">
+					{{> afQuickField name="email"}}
+				</div>
+				<div class="col-sm-6">
+					{{> afQuickField name="phoneNumber"}}
+				</div>
+				<div class="col-sm-6">
+					{{> afQuickField name="userSince"}}
+				</div>
+				<div class="col-sm-12">
+					{{> afQuickField name="bio"}}
+				</div>
+				<div class="col-sm-4 col-sm-offset-8">
+					<button class="btn btn-block btn-primary" type="submit">Submit</button>
+				</div>
+				{{/autoForm}}
+			</div>
 		</div>
-		<div class="form-group col-sm-6 {{#if afFieldIsInvalid name='lastname'}}has-error{{/if}}">
-			<label class="control-label">{{afFieldLabelText name='lastname'}}</label>
-			{{> afFieldInput name='lastname'}}
-			{{#if afFieldIsInvalid name='lastname'}}
-			<span class="help-block">{{{afFieldMessage name='lastname'}}}</span>
-			{{/if}}
-		</div>
-		<div class="form-group col-sm-6 {{#if afFieldIsInvalid name='email'}}has-error{{/if}}">
-			<label class="control-label">{{afFieldLabelText name='email'}}</label>
-			{{> afFieldInput name='email'}}
-			{{#if afFieldIsInvalid name='email'}}
-			<span class="help-block">{{{afFieldMessage name='email'}}}</span>
-			{{/if}}
-		</div>
-		<div class="form-group col-sm-6 {{#if afFieldIsInvalid name='phoneNumber'}}has-error{{/if}}">
-			<label class="control-label">{{afFieldLabelText name='phoneNumber'}}</label>
-			{{> afFieldInput name='phoneNumber'}}
-			{{#if afFieldIsInvalid name='phoneNumber'}}
-			<span class="help-block">{{{afFieldMessage name='phoneNumber'}}}</span>
-			{{/if}}
-		</div>
-		<div class="form-group col-sm-6">
-			<button type="button" id="updateProfile" class="btn btn-primary">Update</button>
-		</div>
-		{{/autoForm}}
 	</div>
-	{{> avatar_modal}}
 </template>

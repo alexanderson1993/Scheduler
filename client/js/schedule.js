@@ -8,16 +8,17 @@ function events(start, end, timezone, callback){
 		user = Meteor.users.findOne({_id:e.user});
 		if (user){
 			if (user.profile){
-				if (user.profile.firstname){
-					e.title = e.title + " - " + user.profile.firstname + " " +
-					user.profile.lastname.substr(0, 1);
+				if (user.profile.firstName){
+					e.title = e.title + " - " + user.profile.firstName + " " +
+					user.profile.lastName.substr(0, 1);
 				}
+				if (!user.profile.color){
+					user.profile.color = Please.make_color();
+					Meteor.users.update({_id:user._id},{$set:{profile:user.profile}});
+				}
+				e.color = user.profile.color;
 			}
 		}
-		if (!userColors[e.user]){
-			userColors[e.user] = Please.make_color();
-		}
-		e.color = userColors[e.user]
 		output.push(e);
 	});
 	callback(output);
@@ -27,21 +28,23 @@ Template.schedule.helpers({
 		return {
 			defaultView:'agendaWeek',
 			id:'calendar',
-			timezone:'UTC',
+			timezone:'MST',
 			editable:true,
 			events:events,
 			height: document.height - document.height/10,
 			allDaySlot:false,
 			minTime:"06:00:00",
 			maxTime:"23:00:00",
-			slotDuration:"00:15:00",
+			slotDuration:"00:30:00",
 			selectable:true,
 			selectHelper:true,
 			select:function(start, end){
 				if (Meteor.userId()){
+					//Add the necessary time to translate
+					//Timezones
 					var obj = {
-						start:start.toISOString(),
-						end:end.toISOString(),
+						start:start.add(7,'h').toISOString(),
+						end:end.add(7,'h').toISOString(),
 						user:Meteor.userId(),
 					};
 					Schedule.insert(obj);
@@ -50,15 +53,15 @@ Template.schedule.helpers({
 			},
 			eventResize:function(event, delta, revertFunc) {
 				var obj = {
-					start:event.start.toString(),
-					end:event.end.toString(),
+					start:event.start.add(7,'h').toString(),
+					end:event.end.add(7,'h').toString(),
 				};
 				Schedule.update({_id:event._id}, {$set:obj});
 			},
 			eventDrop:function(event, delta, revertFunc) {
 				var obj = {
-					start:event.start.toString(),
-					end:event.end.toString(),
+					start:event.start.add(7,'h').toString(),
+					end:event.end.add(7,'h').toString(),
 				};
 				Schedule.update({_id:event._id}, {$set:obj});
 			}

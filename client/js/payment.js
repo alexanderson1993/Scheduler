@@ -56,6 +56,7 @@ Template.payment.events({
               });
               $('.modal').modal('hide');
               Meteor.setTimeout(function(){
+                sAlert.info('Your mission has been booked. You will recieve a confirmation email shortly.');
                 Router.go('/');
               },500);
             }

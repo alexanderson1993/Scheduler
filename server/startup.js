@@ -20,15 +20,15 @@ Accounts.onCreateUser(function(options, user) {
 	if (user.services){
 		if (user.services.google){
 			var data = user.services.google;
-			profile.firstname = data.given_name;
-			profile.lastname = data.family_name;
+			profile.firstName = data.given_name;
+			profile.lastName = data.family_name;
 			profile.name = data.given_name + ' ' + data.family_name;
 			profile.picture = data.picture;
 			profile.email = data.email;
 		} else if (user.services.facebook){
 			var data = user.services.facebook;
-			profile.firstname = data.first_name;
-			profile.lastname = data.last_name;
+			profile.firstName = data.first_name;
+			profile.lastName = data.last_name;
 			profile.name = data.first_name + ' ' + data.last_name;
 			var picture = HTTP.get('https://graph.facebook.com/v2.4/me/picture?type=large&redirect=false&access_token=' + data.accessToken);
 			profile.picture = picture.data.data.url;

@@ -38,7 +38,7 @@ Meteor.methods({
             },
             receipt_email: receipt_email
         });
-        email_obj.amount = (payment_obj.amount/100).toFixed(2);
+        email_obj.amount = (payment_obj.amount / 100).toFixed(2);
         var date = new Date();
         email_obj.date = date.toLocaleDateString();
 
@@ -46,7 +46,6 @@ Meteor.methods({
             if (err) {
                 fut.return(err);
             } else {
-
                 fut.return(res);
             }
         });

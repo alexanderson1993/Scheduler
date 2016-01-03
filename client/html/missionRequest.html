@@ -1,0 +1,31 @@
+<template name="missionRequest">
+	<div class="row pageContent">
+		<div class="col-sm-8 col-sm-offset-2">
+			<h1>Request a Mission Time</h1>
+			<h4>When you make a request, flight directors will be notified and can offer to run that flight for you. You will be contacted by email if a flight director takes your flight. You will then confirm the booking and pay.</h4>
+			<div class="row">
+				{{#autoForm id="demo" schema=schema doc=missionRequestDoc}}
+				<div class="col-sm-6">
+					{{> afQuickField name="name"}}
+				</div>
+				<div class="col-sm-6">
+					{{> afQuickField name="email"}}
+				</div>
+				<div class="col-sm-6">
+					{{> afQuickField name="flightType"}}
+				</div>
+				<div class="col-sm-6">
+					{{> afQuickField name="missionTime"}}
+				</div>
+				<div class="col-sm-12">
+					{{> afQuickField name="notes"}}
+				</div>
+				<div class="col-sm-4 col-sm-offset-8">
+					<button type="reset" class="btn btn-default">Reset Form</button>
+					<button class="btn btn-primary" type="button">Submit</button>
+				</div>
+				{{/autoForm}}
+			</div>
+		</div>
+	</div>
+</template>

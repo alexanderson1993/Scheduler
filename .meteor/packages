@@ -30,6 +30,7 @@ aldeed:collection2
 cfs:standard-packages
 cfs:s3
 cfs:gridfs
+flanamacca:autoform-file-manager
 iron:router
 multiply:iron-router-progress
 useraccounts:bootstrap
@@ -53,3 +54,8 @@ dburles:google-maps
 mirrorcell:card
 infinitedg:stripe
 cmather:handlebars-server
+francocatena:autoform-bs-datetimepicker
+tsega:bootstrap3-datetimepicker@=3.1.3_3
+aldeed:autoform-bs-datetimepicker
+juliancwirko:s-alert
+juliancwirko:s-alert-stackslide

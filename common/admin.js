@@ -1,5 +1,7 @@
 var victorRole = new Roles.Role('victor');
 var flightDirector = new Roles.Role('flight-director');
+var cadet = new Roles.Role('cadet');
+var instructor = new Roles.Role('instructor');
 var userRole = new Roles.Role('user');
 orion.pages.addTemplate({
 	template:'pageTemplate',

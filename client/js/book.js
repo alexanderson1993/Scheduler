@@ -42,10 +42,10 @@ Template.missionTimeChoice.helpers({
 		return {
 			defaultView:'basicWeek',
 			id:'calendar',
-			timezone:'UTC',
+			timezone:'MST',
 			editable:false,
 			events:events,
-			height:document.height - document.height / 10,
+			height:document.height - document.height / 30,
 			eventClick:function(event){
 				var obj = Session.get('pendingBooking');
 				if (event.start._d < Date()){
@@ -77,16 +77,21 @@ function events(start, end, timezone, callback){
 		}
 	});
 	victorDays.forEach(function(e){
-		for (i = 0;
-			i <= Math.ceil(moment.duration(moment(e.end).subtract(flightType.length,'minutes')._d - e.start).asMinutes() / 30);
-			i++){
-			output.push({
+		var obj = {};
+		for (i = 0; i <= Math.ceil(moment.duration(moment(e.end).subtract(flightType.length, 'minutes')._d - e.start).asMinutes() / 30); i++){
+			obj = {
 				start:moment(e.start).add(i * 30, 'minutes'),
 				end:moment(e.start).add(i * 30, 'minutes').add(flightType.length, 'minutes'),
 				title:"Available\n" + flightType.name
-			});
-	}
-});
+			}
+			if (Flight.find({
+				start:{$lt:obj.end._d},
+				end:{$gt:obj.start._d}
+			}).count() <= 0){
+				output.push(obj);
+			}
+		}
+	});
 	callback(output);
 }
 Template.missionTimeChoice.created = function(){

@@ -80,4 +80,10 @@ Meteor.startup(function () {
   _.extend(route.options, {
     template:'accountIndex'
 });
+   sAlert.config({
+        effect: 'stackslide',
+        position: 'top-left',
+        timeout: 5000,
+        html: true,
+    });
 });

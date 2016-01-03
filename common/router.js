@@ -1,4 +1,3 @@
-
 Router.configure({
 	layoutTemplate:'main_layout',
 	onBeforeAction:function(){
@@ -6,7 +5,6 @@ Router.configure({
 		this.next();
 	}
 });
-
 Router.route('/', {
 	layoutTemplate:'front_layout',
 	action:function(){
@@ -43,7 +41,7 @@ Router.route('/book/', {
 		}
 	},
 	waitOn:function(){
-		return [Meteor.subscribe('flighttype'), Meteor.subscribe('schedule'), Meteor.subscribe('victor_roles')];
+		return [Meteor.subscribe('flighttype'), Meteor.subscribe('schedule'), Meteor.subscribe('victor_roles'), Meteor.subscribe('flight',Meteor.userId())];
 	},
 	data:function(){
 		return Session.get('pendingBooking');
@@ -57,9 +55,37 @@ Router.route('/bookingSubmit', {
 		this.render('submitAnimation');
 	}
 });
+Router.route('/request',{
+	onBeforeAction:function(){
+		if (!Meteor.userId()){
+			Session.set('redirectURL','/request');
+			Router.go('/login');
+		} else {
+			this.next();
+		}
+	},
+	data:function(){
+		return Session.get('pendingBooking');
+	},
+	action:function(){
+		this.render('missionRequest');
+	}
+});
+Router.route('/flights', {
+	waitOn:function(){
+		return [Meteor.subscribe('flight',Meteor.userId()), Meteor.subscribe('flighttype'), Meteor.subscribe('mission'), Meteor.subscribe('schedule'), Meteor.subscribe('fd_roles')];
+	},
+	action:function(){
+		if (Roles.userHasRole(Meteor.userId(), 'victor')){
+			this.render('flights');
+		} else {
+			Router.go('/login');
+		}
+	}
+});
 Router.route('/shop', {
 	waitOn:function(){
-		Meteor.subscribe('product');
+		return Meteor.subscribe('product');
 	},
 	actions:function(){
 		this.render('shop');
@@ -67,7 +93,7 @@ Router.route('/shop', {
 });
 Router.route('/schedule', {
 	waitOn:function(){
-		Meteor.subscribe('schedule');
+		return [Meteor.subscribe('schedule',Meteor.userId()), Meteor.subscribe('scheduleUsers',Meteor.userId())];
 	},
 	action:function(){
 		this.render('schedule');

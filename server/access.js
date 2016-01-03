@@ -7,6 +7,9 @@ Pictures.allow({
 	},
 	remove:function(){
 		return false;
+	},
+	download:function(){
+		return true;
 	}
 });
 
@@ -57,8 +60,8 @@ Schedule.allow({
 // Logged in users can create, only assigned users and FDs can modify
 Flight.allow({
 	insert:function(userId){
-		if (!userId){
-			return false;
+		if (userId){
+			return true;
 		}
 	},
 	update:function(userId, doc){
@@ -84,18 +87,18 @@ Flight.allow({
 // Only allow admins to change the flight types
 FlightType.allow({
 	insert:function(userId){
-		if (!Roles.userHasRole(userId, 'admin')){
-			return false;
+		if (Roles.userHasRole(userId, 'admin')){
+			return true;
 		}
 	},
 	update:function(userId){
-		if (!Roles.userHasRole(userId, 'admin')){
-			return false;
+		if (Roles.userHasRole(userId, 'admin')){
+			return true;
 		}
 	},
 	remove:function(userId){
-		if (!Roles.userHasRole(userId, 'admin')){
-			return false;
+		if (Roles.userHasRole(userId, 'admin')){
+			return true;
 		}
 	}
 });

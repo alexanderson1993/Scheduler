@@ -1,6 +1,12 @@
 <head>
 </head>
 <body>
+	<style>
+		.s-alert-box{
+			z-index:10000;
+		}
+	</style>
+	{{> sAlert}}
 </body>
 
 <template name="front_layout">
@@ -14,6 +20,7 @@
 	{{> styleDark}}
 	{{> nav}}
 	{{> yield}}
+	{{> footer}}
 </template>
 
 <template name="main_layout">
@@ -22,8 +29,18 @@
 	<div class="container main-container">
 		{{>yield}}
 	</div>
+	{{> footer}}
 	<div class="background"></div>
 	<div class="modal">
 		{{> submitAnimation}}
+	</div>
+</template>
+
+<template name="pageNotFound">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3 text-center">
+			<h1>That doesn't appear to be a valid page.</h1>
+			<a href="/" class="btn btn-info">Go home</a>
+		</div>
 	</div>
 </template>

@@ -8,7 +8,7 @@
     "secret_key": "sk_live_faB1fwCmRXv0R4ikIPxrydxI"
   },
   "email": {
-    "from": "noreply@farpointstation.org",
-    "notifyTo": ["alex@infinitedev.com"]
+    "from": "noreply@spaceedventures.org",
+    "notifyTo": ["alex@infinitedev.com","director@spacecamputah.org"]
   }
 }

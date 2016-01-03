@@ -7,8 +7,15 @@
 <template name="missions">
 	<h2>Missions</h2>
 	{{#each mission}}
-	<h3>{{name}}</h3>
-	{{{description}}}
-	<img src="{{image}}" />
+	<div class='row'>
+		<div class="col-sm-3">
+			<img class="img-responsive" src="{{picture}}" />
+		</div>
+		<div class="col-sm-9">
+			<h3>{{name}}</h3>
+			{{{description}}}
+		</div>
+	</div>
+	<br />
 	{{/each}}
 </template>
