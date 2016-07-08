@@ -12,7 +12,34 @@ Pictures.allow({
 		return true;
 	}
 });
-
+MissionPictures.allow({
+	insert:function(){
+		return true;
+	},
+	update:function(){
+		return true;
+	},
+	remove:function(){
+		return false;
+	},
+	download:function(){
+		return true;
+	}
+});
+GradesFiles.allow({
+	insert:function(){
+		return true;
+	},
+	update:function(){
+		return true;
+	},
+	remove:function(){
+		return false;
+	},
+	download:function(){
+		return true;
+	}
+});
 Users.allow({
 	insert:function(userId, doc){
 		// No creation of users with roles automatically assigned.
@@ -102,3 +129,21 @@ FlightType.allow({
 		}
 	}
 });
+
+Application.allow({
+	insert:function(userId){
+		if (userId){
+			return true;
+		}
+	},
+	update:function(userId){
+		if (Roles.userHasRole(userId, 'admin')){
+			return true;
+		}
+	},
+	remove:function(userId){
+		if (Roles.userHasRole(userId, 'admin')){
+			return true;
+		}
+	}
+})

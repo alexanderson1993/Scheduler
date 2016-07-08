@@ -1,0 +1,98 @@
+<template name="academy_application">
+	<style>
+		.select label{
+			color:#fff;
+		}
+		.select{
+			width:100%;
+		}
+		::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+			color:    #fff;
+		}
+		:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+			color:    #fff;
+			opacity:  1;
+		}
+		::-moz-placeholder { /* Mozilla Firefox 19+ */
+			color:    #fff;
+			opacity:  1;
+		}
+		:-ms-input-placeholder { /* Internet Explorer 10-11 */
+			color:    #fff;
+		}
+		:placeholder-shown { /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+			color:    #fff;
+		}
+	</style>
+	<h1>Apply for Flight Director Academy</h1>
+	<div class="pageContent">
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
+				<h2>Have you ever wanted to become a flight director?</h2>
+				<p>Now is your chance! The Mission Control Flight Director Academy is accepting applications for the winter semester flight director training course. Those who graduate from the course will be employed at the Renaissance Academy Voyager simulator, with the possibility of employment at the Christa McAuliffe Space Education Center and Discovery Simulations.</p>
+
+				<p>Only 15 cadets will be admitted. This course will be taught on a recurring basis twice a year. If you are not accepted, we encourage you to apply again in the future.</p>
+
+				<p><strong>In order to apply, applicants must meet the following requirements:</strong></p>
+				<ol>
+					<li>At least 15 years of age</li>
+					<li>Have a minimum GPA of 3.0 (if accepted, this GPA must be maintained</li>
+				</ol>
+				<p><strong>To apply, follow the instructions below:</strong></p>
+				<ol>
+					<li>Fill out the basic information on the application form.</li>
+					<li>Submit a recent photo.</li>
+					<li>Request an endorsement from an eligible Space Center employee. Individuals qualified to endorse are listed on the application form.</li>
+					<li>Submit a copy of your most recent grades</li>
+					<li>After your application, photo, endorsement, and grades have been submitted, a Mission Control flight instructor will contact you to set up a short interview.</li>
+				</ol>
+				<p><strong>If accepted, cadets must attend the training sessions:</strong></p>
+				<ul>
+					<li>Thursday, February 18th</li>
+					<li>Thursday, February 25th</li>
+					<li>Thursday, March 10th</li>
+					<li>Thursday, March 17th</li>
+					<li>Thursday, March 24th</li>
+					<li>Thursday, March 31st</li>
+					<li>Thursday, April 7th</li>
+					<li>Thursday, April 14th</li>
+					<li>Thursday, April 21st</li>
+					<li>Saturday, April 22th (Time and location TBD)</li>
+				</ul>
+				<p>All training sessions will be held from 6:00 - 9:00 pm at the Renaissance Academy Voyager Simulator in Lehi, UT</p>
+
+				<p>Send all questions to <a href="mailto:farpointtraining@gmail.com">farpointtraining@gmail.com</a></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<h2>Application</h2>
+				{{#autoForm id="application" collection="Application" type="insert"}}
+				<div class="form-group">
+					<label for="" class="control-label">Name</label>
+					<input type="text" name="name" id="" data-schema-key="" readonly value={{profile.name}} class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="" class="control-label">Email</label>
+					<input type="text" name="name" id="" data-schema-key="" readonly value={{profile.email}} class="form-control">
+				</div>
+				{{> afQuickField name="picture"}}
+				{{> afQuickField name="birthdate"}}
+				{{> afQuickField name="phone"}}
+				{{> afQuickField name="school"}}
+				{{> afQuickField name="grade"}}
+				{{> afQuickField name="grades"}}
+				{{> afQuickField name="extra"}}
+				{{> afQuickField name="bio"}}
+				<div class="select">
+					{{> afQuickField name="endorsement"}}
+				</div>
+				<div class="form-group pull-right">
+					<button type="reset" class="btn btn-default">Reset Form</button>
+					<button type="button" class="btn btn-primary submit">Submit Application</button>
+				</div>
+				{{/autoForm}}
+			</div>
+		</div>
+	</div>
+</template>

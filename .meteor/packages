@@ -42,6 +42,7 @@ accounts-ui
 service-configuration
 upload-avatar
 cfs:filesystem
+cfs:autoform
 rzymek:fullcalendar
 orionjs:core
 orionjs:bootstrap

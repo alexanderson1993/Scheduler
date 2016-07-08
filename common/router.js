@@ -31,6 +31,23 @@ Router.route('/profile', {
 		}
 	}
 });
+Router.route('/academy', {
+	onBeforeAction:function(){
+		if (!Meteor.userId()){
+			Session.set('redirectURL','/academy');
+			Router.go('/login');
+		} else {
+			this.next();
+		}
+	},
+	action:function(){
+		if (Roles.userHasRole(Meteor.userId(),'cadet')){
+			this.render('academy');
+		} else {
+			this.render('academy_application');
+		}
+	}
+});
 Router.route('/book/', {
 	onBeforeAction:function(){
 		if (!Meteor.userId()){

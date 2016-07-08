@@ -1,0 +1,222 @@
+<template name="academy">
+    <div class="pageContent">
+        <div class="row">
+            <div class="col-sm-3"><img class="img-responsive" draggable="false" src="/mic.svg"></div>
+            <div class="col-sm-9">
+                <h1>Welcome to Mission Control!</h1>
+                <p>This site contains all the materials to supplement the hands-on flight director training course. You can access course documents (e.g. syllabi, slides, quizzes, etc.), library of missions and effects, and track your progress through the course. To access course resources, you must login using the link at the top of the page. If you do not have an account, please use the signup button to request one.</p>
+                <p>If you have any questions, please feel free to contact the course instructor at any time.</p>
+                <p>That is all.</p>
+            </div>
+        </div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#materials" aria-controls="materials" role="tab" data-toggle="tab" aria-expanded="true">Course Materials</a></li>
+            <li role="presentation" class=""><a href="#resources" aria-controls="resources" role="tab" data-toggle="tab" aria-expanded="false">Resources</a></li>
+            <li role="presentation" class=""><a href="#progress" aria-controls="progress" role="tab" data-toggle="tab" aria-expanded="false">My Progress</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="materials">
+                <h3>Course Materials</h3>
+                <p>Below is all the documentation that accompanies the flight director training course. A binder with all materials should have been provided by your course instructor, however individual files may be downloaded here. You may also download the complete file set by clicking here.</p>
+                <p></p>
+                <style>
+                    ol.toc,
+                    ol.toc ol {
+                        list-style: none;
+                        counter-reset: toc;
+                    }
+
+                    ol > li {
+                        counter-increment: toc;
+                    }
+
+                    .toc ol > li:before {
+                        content: counters(toc, ".") " - ";
+                    }
+
+                    .toc {
+                        -webkit-column-count: 2;
+                        /* Chrome, Safari, Opera */
+                        -moz-column-count: 2;
+                        /* Firefox */
+                        column-count: 2;
+                        -webkit-column-gap: 40px;
+                        /* Chrome, Safari, Opera */
+                        -moz-column-gap: 40px;
+                        /* Firefox */
+                        column-gap: 40px;
+                        -webkit-column-rule: 1px solid lightblue;
+                        /* Chrome, Safari, Opera */
+                        -moz-column-rule: 1px solid lightblue;
+                        /* Firefox */
+                        column-rule: 1px solid lightblue;
+                    }
+                </style>
+                <ol class="toc">
+                    <li>Week 1
+                        <ol>
+                            <li>Orientation</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>Power Point</li>
+                            </ul>
+                            <li>Space Center Introduction</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>Power Point</li>
+                                <li>Quiz</li>
+                            </ul>
+                            <li>First Flight</li>
+                            <ul>
+                                <li>Syllabus</li>
+                            </ul>
+                        </ol>
+                    </li>
+                    <li>Week 2
+                        <ol>
+                            <li>Ship Startup/Shutdown</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>Checklist</li>
+                            </ul>
+                            <li>Briefing/Training</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>PowerPoint</li>
+                                <li>Briefing Script</li>
+                                <li>Briefing Evaluation Rubric</li>
+                            </ul>
+                            <li>Voice Hanger Operation</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>PowerPoint</li>
+                                <li>Voice Changer Cheat Sheet</li>
+                            </ul>
+                        </ol>
+                    </li>
+                    <li>Week 3
+                        <ol>
+                            <li>Main Computer</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>PowerPoint</li>
+                                <li>Phrase Sheet</li>
+                                <li>Quiz</li>
+                            </ul>
+                            <li>Chief Engineer</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>PowerPoint</li>
+                                <li>Phrase Sheet</li>
+                                <li>Quiz</li>
+                            </ul>
+                            <li>Flight Introduction</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>PowerPoint</li>
+                                <li>Full Mission Script</li>
+                                <li>Quiz</li>
+                                <li style="visibility:hidden;"></li>
+                                <li style="visibility:hidden;"></li>
+                                <li style="visibility:hidden;"></li>
+                                <li style="visibility:hidden;"></li>
+                            </ul>
+                        </ol>
+                    </li>
+                    <li>Week 4
+                        <ol>
+                            <li>Special Effects</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>PowerPoint</li>
+                                <li>Phrase Sheet</li>
+                                <li>Quiz</li>
+                            </ul>
+                            <li>Sound Board/Music</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>PowerPoint</li>
+                                <li>Sound Board Cheat Sheet</li>
+                                <li>Mission Playlist</li>
+                                <li>Mission Music Files</li>
+                            </ul>
+                            <li>Tactical/Video</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>PowerPoint</li>
+                                <li>Tactical Script</li>
+                                <li>Tactical Screenshots</li>
+                            </ul>
+                            <li>Flight Director Controls</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>PowerPoint</li>
+                                <li>Control Screenshots</li>
+                                <li>Video Script</li>
+                                <li>Quiz</li>
+                            </ul>
+                        </ol>
+                    </li>
+                    <li>Week 5
+                        <ol>
+                            <li>Making the Difference</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>PowerPoint</li>
+                            </ul>
+                            <li>Part 1</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>Flight Evaluation Rubric</li>
+                            </ul>
+                        </ol>
+                    </li>
+                    <li>Week 6 - 10
+                        <ol>
+                            <li>Second Story</li>
+                            <ul>
+                                <li>Syllabus</li>
+                                <li>PowerPoint</li>
+                                <li>Quiz</li>
+                            </ul>
+                        </ol>
+                    </li>
+                    <li>
+                        <ol>
+                            <li>Part 2</li>
+                            <ul>
+                                <li>Syllabus</li>
+                            </ul>
+                        </ol>
+                    </li>
+                    <li>
+                        <ol>
+                            <li>Part 3</li>
+                            <ul>
+                                <li>Syllabus</li>
+                            </ul>
+                        </ol>
+                    </li>
+                    <li>
+                        <ol>
+                            <li>Free Drills</li>
+                            <ul>
+                                <li>Syllabus</li>
+                            </ul>
+                        </ol>
+                    </li>
+                    <li>
+                        <ol>
+                            <li>Test Flights</li>
+                            <ul>
+                                <li>Syllabus</li>
+                            </ul>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="resources">...</div>
+            <div role="tabpanel" class="tab-pane fade" id="progress">...</div>
+        </div>
+    </div>
+</template>

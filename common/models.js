@@ -128,6 +128,18 @@ MissionRequest = Collections.MissionRequest = new orion.collection('missionreque
 		]
 	}
 });
+Application = Collections.Application = new orion.collection('application',{
+	singularName:'application',
+	pluralName:'Applications',
+	link:{
+		title:'Applications'
+	},
+	tabular: {
+		columns: [
+		{ data: "name", title: "Name" },
+		]
+	}
+})
 pictureStore = new FS.Store.GridFS('profile-pictures', {
 	chunkSize:1024 * 1024,
 });
@@ -153,6 +165,10 @@ MissionPictures = Collections.MissionPictures = new FS.Collection('missionPictur
             contentTypes:['image/*'] // allow only images in this FS.Collection
         }
     }
+});
+
+GradesFiles = Collections.GradesFiles = new FS.Collection('gradesFiles',{
+	stores:[pictureStore]
 });
 // This users schema is just for autoform, not for attaching
 // To the collection.
@@ -510,7 +526,109 @@ Schemas.MissionRequest = new SimpleSchema({
 		optional:true
 	}
 });
-
+Schemas.Application = new SimpleSchema({
+	user_id:{
+		type:String,
+		regEx:SimpleSchema.RegEx.Id,
+		autoValue:function() {
+			if (this.isInsert) {
+				return Meteor.userId();
+			}
+		},
+	},
+	picture:{
+		label:"Please upload a portrait",
+		type:String,
+		autoform:{
+			afFieldInput:{
+				type:'cfs-file',
+				collection:'pictures'
+			}
+		}
+	},
+	birthdate:{
+		type:Date,
+		autoform:{
+			afFieldInput: {
+				type:'bootstrap-datetimepicker',
+			}
+		},
+		label: 'Date of Birth'
+	},
+	phone:{
+		type:String,
+		optional:true
+	},
+	school:{
+		type:String,
+	},
+	grade:{
+		type:String,
+		label:'Year in School'
+	},
+	grades:{
+		label:"Please upload your current grades",
+		type:String,
+		autoform:{
+			afFieldInput:{
+				type:'cfs-file',
+				collection:'gradesFiles'
+			}
+		}
+	},
+	extra:{
+		type:String,
+		autoform:{
+			rows:5
+		},
+		label:"Write a short paragraph about extracurricular activities you are involved in.",
+		optional:true
+	},
+	bio:{
+		type:String,
+		autoform:{
+			rows:5
+		},
+				label:"Write a short paragraph about yourself.",
+		optional:true
+	},
+	endorsement:{
+		type:String,
+		label:"Which of the following has agreed to endorse you?",
+		autoform: {
+			options: [
+			{
+				label: "Victor W. (Voyager)",
+				value: "Victor"
+			},
+			{
+				label: "Emily P. (Voyager)",
+				value: "Emily"
+			},
+			{
+				label: "Brittney V. (Voyager)",
+				value: "Brittney"
+			},
+			{
+				label: "James P. (CMSEC)",
+				value: "James"
+			},
+			{
+				label: "Jon P. (CMSEC)",
+				value: "Jon"
+			},
+			{
+				label: "Casey V. (DSIM)",
+				value: "Casey"
+			},
+			{
+				label: "Sarah G. (DSIM)",
+				value: "Sarah"
+			}
+			]
+		}
+	}
+});
 Collections.Schedule.attachSchema(Schemas.Schedule);
 Collections.Flight.attachSchema(Schemas.Flight);
 Collections.FlightType.attachSchema(Schemas.FlightType);
@@ -520,7 +638,8 @@ Collections.Mission.attachSchema(Schemas.Mission);
 Collections.Product.attachSchema(Schemas.Product);
 Collections.Faq.attachSchema(Schemas.Faqs);
 Collections.Simulator.attachSchema(Schemas.Simulator);
-Collections.MissionRequest.attachSchema(Schemas.MissionRequest)
+Collections.MissionRequest.attachSchema(Schemas.MissionRequest);
+Collections.Application.attachSchema(Schemas.Application);
 Schedule.helpers({
 	forbiddenFields: function () {
 		return false;
